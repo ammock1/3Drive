@@ -1,9 +1,5 @@
 window.onload = main;
-var mouseX, mouseY, camX, camY, camZ, camera, cube, radius;
-
-function addListeners(container){
-
-}
+var camera, importOBJ;
 
 function main(){
   console.log("Window loaded");
@@ -16,29 +12,35 @@ function main(){
     return;
   }
 
+
+  var material = new THREE.MeshStandardMaterial({roughness: 0.5, color: 0x20ffff, metalness: 0.0});
+
   var scene = new THREE.Scene();
   var loader = new THREE.OBJLoader();
   loader.load(
     "../testData/Diamond.obj",
     function(object){
+      importOBJ = object;
+      object.traverse(function(child){
+        if(child instanceof THREE.Mesh){
+          child.material = material;
+          child.material.needsUpdate = true;
+        }
+      });
       scene.add(object);
-    }
-  );
+    });
+
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
   var renderer = new THREE.WebGLRenderer( { alpha: true } );
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setClearColor( 0x303030, 1.0 );
   document.body.appendChild( renderer.domElement );
-  //addListeners(renderer.domElement);
-
-  /*var geometry = new THREE.BoxGeometry();
-  var material = new THREE.MeshStandardMaterial({roughness: 0.2, color: 0x2020ff, metalness: 0.0});
-  cube = new THREE.Mesh( geometry, material );
-  scene.add( cube );*/
 
 
-  var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+
+
+  var light = new THREE.AmbientLight( 0x404040 );
   scene.add( light );
   var light2 = new THREE.DirectionalLight( 0xffff90);
   light2.position.set( 50, 50, 100 );

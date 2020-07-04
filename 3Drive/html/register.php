@@ -1,3 +1,7 @@
+<?php
+	include ('registercode.php')
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,21 +19,22 @@
 		</p>
 		<main>
 			<h2>Register </h2>
-			<form>
+			<form action ="" method="post">
 				<p>
 					<label>Username: </label>
-					<input type='text' name="user"/>
+					<input type='text' id="user" name="user"/>
 				</p>
 				<p>
 					<label>Password: </label>
-					<input type='text' name="pass1"/>
+					<input type='password' id="pass1" name="pass1"/>
 				</p>
 				<p>
 					<label>Confirm Password: </label>
-					<input type='text' name="pass2"/>
+					<input type='password' id="pass2" name="pass2"/>
 				</p>
 					<a href = '3drive.html'>Cancel</a>
-					<input type = 'submit'>
+					<input type = 'submit' name="submit">
+					<span><?php echo $invalid; ?></span>
 			</form>
 		</main>
 		<footer>

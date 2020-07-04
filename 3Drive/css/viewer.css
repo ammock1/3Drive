@@ -1,0 +1,11 @@
+body { margin: 0; }
+canvas {
+  display:inline;
+  float: right;
+}
+#sidebar{
+  position: absolute;
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.5);
+  bottom: 50%;
+}

@@ -1,5 +1,31 @@
 window.onload = main;
-var camera, importOBJ;
+var camera, renderer, importOBJ;
+
+function addListeners(){
+  window.addEventListener('resize', (e) => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+  var colorpicker = document.querySelector("#colorpicker");
+
+  colorpicker.addEventListener('input', (e) => {
+    importOBJ.traverse(function(child){
+      if(child instanceof THREE.Mesh){
+        child.material.color = new THREE.Color(e.target.value);
+      }
+    });
+  });
+
+  var roughpicker = document.querySelector("#roughpicker")
+  roughpicker.addEventListener('input', (e) => {
+    importOBJ.traverse(function(child){
+      if(child instanceof THREE.Mesh){
+        child.material.roughness = e.target.value;
+      }
+    });
+  });
+}
 
 function main(){
   console.log("Window loaded");
@@ -13,12 +39,12 @@ function main(){
   }
 
 
-  var material = new THREE.MeshStandardMaterial({roughness: 0.5, color: 0x20ffff, metalness: 0.0});
+  var material = new THREE.MeshStandardMaterial({roughness: 0.5, color: 0xffffff, metalness: 0.0});
 
   var scene = new THREE.Scene();
   var loader = new THREE.OBJLoader();
   loader.load(
-    "../testData/Diamond.obj",
+    "../testData/Sphere.obj",
     function(object){
       importOBJ = object;
       object.traverse(function(child){
@@ -32,23 +58,27 @@ function main(){
 
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-  var renderer = new THREE.WebGLRenderer( { alpha: true } );
+  renderer = new THREE.WebGLRenderer( { alpha: true } );
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setClearColor( 0x303030, 1.0 );
   document.body.appendChild( renderer.domElement );
 
+  //Adding lights
+  var ambient = new THREE.AmbientLight( 0x404040 );
+  scene.add( ambient );
+  var mainLight = new THREE.DirectionalLight( 0xffffbb, 1.0);
+  mainLight.position.set( 50, 150, 100 );
+  var mainHelp = new THREE.DirectionalLightHelper(mainLight, 2);
+  scene.add( mainLight );
+  scene.add( mainHelp );
+  var fillLight = new THREE.DirectionalLight(0xbbffff, 0.1);
+  fillLight.position.set(-50, -50, -100);
+  var fillHelp = new THREE.DirectionalLightHelper(fillLight, 2);
+  scene.add (fillLight);
+  //scene.add (fillHelp);
 
 
-
-  var light = new THREE.AmbientLight( 0x404040 );
-  scene.add( light );
-  var light2 = new THREE.DirectionalLight( 0xffff90);
-  light2.position.set( 50, 50, 100 );
-  light2.rotation.set( 20, 20, 20);
-  var helper = new THREE.DirectionalLightHelper(light2, 5);
-  scene.add( light2 );
-  scene.add( helper );
-
+  //Moving camera and setting up controls
   camera.position.z = 5;
   var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
@@ -57,6 +87,6 @@ function main(){
     controls.update();
     renderer.render( scene, camera );
   };
-
+  addListeners();
   animate();
 }

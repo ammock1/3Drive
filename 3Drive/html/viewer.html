@@ -9,17 +9,42 @@
   <body>
     <script src="../js/three.js"></script>
     <script src="../js/OBJLoader.js"></script>
+    <script type="module">
+      //import {TextureLoader} from '../js/TextureLoader.js';
+    </script>
     <script src="../js/OrbitControls.js"></script>
     <canvas id = "glCanvas" width="0" height="0"></canvas>
     <div id = "container" width="640" height="480"></div>
     <script src="../js/viewer.js"></script>
     <a href = "3drive.html" id="goback">Go Back</a>
     <div id="sidebar">
-      <button> Transform </button><br>
+      <button> Transform </button>
+      <div id="TransformPanel">
+        <label> Translate </label><br>
+        <label> x: </label>
+        <input type = "number" value="0" id="xpos">
+        <label> y: </label>
+        <input type = "number" value="0" id="ypos">
+        <label> z: </label>
+        <input type = "number" value="0" id="zpos"><br>
+        <label> Rotate </label><br>
+        <label> x: </label>
+        <input type = "number" value="0" id="xrot">
+        <label> y: </label>
+        <input type = "number" value="0" id="yrot">
+        <label> z: </label>
+        <input type = "number" value="0" id="zrot"><br>
+        <label> Scale: </label>
+        <input type= "number" value = "1" id="scale">
+      </div>
       <button> Edit Lighting </button><br>
+        <div id= "LightPanel">
+        </div>
       <button> Edit Material </button><br>
       <label> Color: </label>
       <input id = "colorpicker" type="color" value="#ffffff"/><br>
+      <label> Texture: </label>
+      <input id = "texpicker" type="file" accept="image/png, image/jpeg"><br>
       <label> Roughness: </label>
       <input id = "roughpicker" type="number" min="0" max="1" value = "0.5"><br>
       <button> Save Image </button><br>

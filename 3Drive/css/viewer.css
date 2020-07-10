@@ -18,6 +18,18 @@ canvas {
   top: 20%;
   text-align: center;
 }
+.visButton{
+  display:block;
+}
+#panelsDiv{
+  float:left;
+  display: inline;
+}
+
+#buttonsDiv{
+  display: inline;
+  float:right;
+}
 input[type="number"]{
   width: 3em;
 }

@@ -18,36 +18,42 @@
     <script src="../js/viewer.js"></script>
     <a href = "3drive.html" id="goback">Go Back</a>
     <div id="sidebar">
-      <button> Transform </button>
-      <div id="TransformPanel">
-        <label> Translate </label><br>
-        <label> x: </label>
-        <input type = "number" value="0" id="xpos">
-        <label> y: </label>
-        <input type = "number" value="0" id="ypos">
-        <label> z: </label>
-        <input type = "number" value="0" id="zpos"><br>
-        <label> Rotate </label><br>
-        <label> x: </label>
-        <input type = "number" value="0" id="xrot">
-        <label> y: </label>
-        <input type = "number" value="0" id="yrot">
-        <label> z: </label>
-        <input type = "number" value="0" id="zrot"><br>
-        <label> Scale: </label>
-        <input type= "number" value = "1" id="scale">
-      </div>
-      <button> Edit Lighting </button><br>
-        <div id= "LightPanel">
+      <div id = "panelsDiv">
+        <div id="TransformPanel" class="panel">
+          <label> Translate </label><br>
+          <label> x: </label>
+          <input type = "number" value="0" id="xpos" class="tinput">
+          <label> y: </label>
+          <input type = "number" value="0" id="ypos" class="tinput">
+          <label> z: </label>
+          <input type = "number" value="0" id="zpos" class="tinput"><br>
+          <label> Rotate </label><br>
+          <label> x: </label>
+          <input type = "number" value="0" id="xrot" class = "tinput">
+          <label> y: </label>
+          <input type = "number" value="0" id="yrot" class = "tinput">
+          <label> z: </label>
+          <input type = "number" value="0" id="zrot" class = "tinput"><br>
+          <label> Scale: </label>
+          <input type= "number" value = "1" id="scale" class= "tinput">
         </div>
-      <button> Edit Material </button><br>
-      <label> Color: </label>
-      <input id = "colorpicker" type="color" value="#ffffff"/><br>
-      <label> Texture: </label>
-      <input id = "texpicker" type="file" accept="image/png, image/jpeg"><br>
-      <label> Roughness: </label>
-      <input id = "roughpicker" type="number" min="0" max="1" value = "0.5"><br>
-      <button> Save Image </button><br>
+        <div id= "LightPanel" class="panel"></div>
+        <div id= "MatPanel" class="panel">
+          <label> Color: </label>
+          <input id = "colorpicker" type="color" value="#ffffff"/><br>
+          <label> Texture: </label>
+          <input id = "texpicker" type="file" accept="image/png, image/jpeg"><br>
+          <label> Roughness: </label>
+          <input id = "roughpicker" type="number" min="0" max="1" value = "0.5">
+        </div>
+        <div id= "SavePanel" class="panel"></div>
+      </div>
+      <div id = "buttonsDiv">
+        <button id="tbutton" class="visButton"> Transform </button>
+        <button id="lbutton" class="visButton"> Edit Lighting </button>
+        <button id="mbutton" class="visButton"> Edit Material </button>
+        <button id ="sbutton" class="visButton"> Save Image </button><br>
+      </div>
     </div>
   </body>
 

@@ -81,20 +81,11 @@ function addListeners(){
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  var xpos = document.querySelector("#xpos");
-  var ypos = document.querySelector("#ypos");
-  var zpos = document.querySelector("#zpos");
-  var xrot = document.querySelector("#xrot");
-  var yrot = document.querySelector("#yrot");
-  var zrot = document.querySelector("#zrot");
-  var scale = document.querySelector("#scale");
-  xpos.addEventListener('input', updateTransform);
-  ypos.addEventListener('input', updateTransform);
-  zpos.addEventListener('input', updateTransform);
-  xrot.addEventListener('input', updateTransform);
-  yrot.addEventListener('input', updateTransform);
-  zrot.addEventListener('input', updateTransform);
-  scale.addEventListener('input', updateTransform);
+  var tinputs = document.getElementsByClassName("tinput");
+  for(var i = 0; i < tinputs.length; i++){
+    tinputs[i].addEventListener('input', updateTransform);
+  }
+
   var colorpicker = document.querySelector("#colorpicker");
 
   colorpicker.addEventListener('input', (e) => {
@@ -116,7 +107,7 @@ function addListeners(){
     });
   });*/
 
-  var roughpicker = document.querySelector("#roughpicker")
+  var roughpicker = document.querySelector("#roughpicker");
   roughpicker.addEventListener('input', (e) => {
     importOBJ.traverse(function(child){
       if(child instanceof THREE.Mesh){
@@ -124,6 +115,41 @@ function addListeners(){
       }
     });
   });
+
+  //Add listeners to visibility toggle buttons
+  var visButtons = document.getElementsByClassName("visButton");
+  for(var i = 0; i < visButtons.length; i++){
+    visButtons[i].addEventListener('click', panelHandler);
+  }
+}
+
+function panelHandler(e){
+  var button = e.target.id;
+  var target;
+  var panels = document.getElementsByClassName("panel");
+  switch (button){
+    case "tbutton":
+      target = document.querySelector("#TransformPanel");
+      break;
+    case "lbutton":
+      target = document.querySelector("#LightPanel");
+      break;
+    case "mbutton":
+      target = document.querySelector("#MatPanel");
+      break;
+    case "sbutton":
+      target = document.querySelector("#SavePanel");
+      break;
+  }
+  if(target.style.display == "none"){
+    for(var i = 0; i < panels.length; i++){
+      panels[i].style.display = "none";
+    }
+    target.style.display = "block";
+  }
+  else{
+    target.style.display = "none";
+  }
 }
 
 function updateTransform(e){
@@ -142,6 +168,10 @@ function updateTransform(e){
 
 function main(){
   console.log("Window loaded");
+  var panels = document.getElementsByClassName("panel");
+  for(var i = 0; i < panels.length; i++){
+    panels[i].style.display = "none";
+  }
   //Get openGL
   const canvas = document.querySelector("#glCanvas");
   const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");

@@ -9,8 +9,7 @@
 		<meta charset="utf-8">
 		<title>3Drive</title>
 		<link rel="stylesheet" href="../css/list.css" />
-		<style>
-		</style>
+		<script src="../js/list.css"></script>
 	</head>
 	<body>
 		<header>
@@ -34,16 +33,19 @@
 		</div>
 		<main>
 			<div id="obj1" class="obj">
-				<div class="objInfo">
-					<label class="objname">Obj name here</label>
-					<button>hamburger</button>
+				<div class="display">
+					<div class="objInfo">
+						<label class="objname">Obj name here</label>
+						<button class="ham"></button>
+					</div>
+					<img src="../images/Cube.png" width=128px/>
 				</div>
-				<img src="../images/Cube.png" width=128px/>
-			</div>
-			<div id="obj2" class="obj">
-				<label class="objname">CUBE</label>
-				<button>hamburger</button>
-				<img src="../images/Cube.png" width=128px/>
+				<div class="options">
+					<p>View</p>
+					<p>Download</p>
+					<p>Add to list</p>
+					<p>Remove from list</p>
+				</div>
 			</div>
 		</main>
 		<footer>

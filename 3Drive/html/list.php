@@ -27,13 +27,24 @@
 			<form action="" method="post" enctype="multipart/form-data">
 					<label>Username: <?php echo $_SESSION["username"]; ?> </label>
 
-					<input type = 'file' name="userfile"/>
+					<input type = 'file' id="userfile" name="userfile" accept=".obj"/>
 					<input type = 'submit' value="Upload"/>
 			</form>
 
 		</div>
 		<main>
-
+			<div id="obj1" class="obj">
+				<div class="objInfo">
+					<label class="objname">Obj name here</label>
+					<button>hamburger</button>
+				</div>
+				<img src="../images/Cube.png" width=128px/>
+			</div>
+			<div id="obj2" class="obj">
+				<label class="objname">CUBE</label>
+				<button>hamburger</button>
+				<img src="../images/Cube.png" width=128px/>
+			</div>
 		</main>
 		<footer>
 			<hr>

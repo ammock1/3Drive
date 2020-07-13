@@ -1,0 +1,66 @@
+body{
+  background-color: rgb(200, 200, 200);
+  margin: 0px;
+}
+#logo{
+  float: left;
+}
+main{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+header{
+  padding: 1em;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: white;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+}
+h1{
+  position: relative;
+  left: 18px;
+}
+h2{
+  position: relative;
+  left: 18px;
+}
+
+#logbox, #viewbox{
+  padding: 1em;
+  text-align: center;
+  margin: 2em;
+  background-color: white;
+  flex-basis: 20em;
+}
+
+#logbox{
+  display:flex;
+  flex-direction: column;
+}
+
+#or{
+  background-color: white;
+  text-align: center;
+  padding: 1em;
+  width: 2em;
+  margin: auto;
+  border-radius: 50px;
+}
+
+#logp{
+  background-color: #88fde4;
+  margin: auto;
+  padding: 0.5em;
+  border-radius: 10px;
+  width: 6em;
+}
+
+#regp{
+  background-color: #39fe2e;
+  margin: auto;
+  padding: 0.5em;
+  border-radius: 10px;
+  width: 6em;
+  margin-top: 1em;
+}

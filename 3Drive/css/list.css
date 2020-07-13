@@ -5,6 +5,13 @@ body{
 #logo{
   float: left;
 }
+#foldLabel{
+  font-size: 25px;
+  font-family: sans-serif;
+}
+select{
+  font-size: 20px;
+}
 main{
   padding: 1em;
   text-align: center;
@@ -66,8 +73,4 @@ footer{
   height: 32px;
   background-image: url("../images/hamburger.png");
   background-size: 32px 32px;
-}
-
-.options{
-  display: none;
 }

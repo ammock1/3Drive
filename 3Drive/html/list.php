@@ -15,7 +15,7 @@
 		<header>
 			<img id="logo" src="../images/Logo.png" width = "90px">
 			<form>
-				<label>Viewing models in:</label>
+				<label id="foldLabel">Viewing models in:</label>
 				<select>
 					<option>All</option>
 				</select>
@@ -33,18 +33,15 @@
 		</div>
 		<main>
 			<div id="obj1" class="obj">
-				<div class="display">
-					<div class="objInfo">
-						<label class="objname">Obj name here</label>
-						<button class="ham"></button>
-					</div>
-					<img src="../images/Cube.png" width=128px/>
+				<div class="objInfo">
+					<label class="objname">Obj name here</label>
+					<button class="ham"></button>
 				</div>
+				<img class="image" src="../images/Cube.png" width=128px/>
 				<div class="options">
 					<p>View</p>
 					<p>Download</p>
-					<p>Add to list</p>
-					<p>Remove from list</p>
+					<p>Move</p>
 				</div>
 			</div>
 		</main>

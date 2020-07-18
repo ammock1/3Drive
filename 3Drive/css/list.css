@@ -5,6 +5,13 @@ body{
 #logo{
   float: left;
 }
+#foldLabel{
+  font-size: 25px;
+  font-family: sans-serif;
+}
+select{
+  font-size: 20px;
+}
 main{
   padding: 1em;
   text-align: center;
@@ -24,7 +31,7 @@ header{
 #sidebar{
   float: left;
   padding: 1em;
-  width: 5em;
+  width: 12em;
   height: 500px;
   background-color: white;
 }
@@ -40,4 +47,30 @@ h2{
   position: relative;
 }
 footer{
+}
+.obj{
+  padding: 0.5em;
+  margin: 1em;
+  width: 200px;
+  background-color: white;
+  border-radius: 15px;
+  text-align: center;
+  display: inline-block;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+}
+.objInfo{
+  padding: 0.5em;
+}
+.objInfo label{
+  display:inline-block;
+  font-size: 25px;
+}
+
+.ham{
+  margin: 0px;
+  border-style: none;
+  width: 32px;
+  height: 32px;
+  background-image: url("../images/hamburger.png");
+  background-size: 32px 32px;
 }

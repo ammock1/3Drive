@@ -2,6 +2,8 @@
 <?php
 	include ('logincode.php');
 	include ('upload.php');
+	include ('accessfiles.php');
+	include ('download.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,8 +11,7 @@
 		<meta charset="utf-8">
 		<title>3Drive</title>
 		<link rel="stylesheet" href="../css/list.css" />
-		<style>
-		</style>
+		<script src="../js/list.js"></script>
 	</head>
 	<body>
 		<header>
@@ -25,15 +26,38 @@
 		<div id = "sidebar">
 
 			<form action="" method="post" enctype="multipart/form-data">
-					<label>Username: <?php echo $_SESSION["username"]; ?> </label>
+					<label>Username: <?php echo $_SESSION["username"];
+					$user=$_SESSION["username"];?> </label>
 
 					<input type = 'file' name="userfile"/>
 					<input type = 'submit' value="Upload"/>
 			</form>
 
 		</div>
-		<main>
 
+		<main>
+			<!-- <div id="obj1" class="obj"> -->
+				<?php for($i=0; $i<$length-2 ; $i++){
+					echo "<div id='obj' class='obj'>";
+					echo "<div class='objInfo'>";
+					echo "<label class='objname'>$myfiles[$i]</label>";
+					//echo	"<button class='ham'></button>";
+					echo "</div>";
+					echo "<img class='image' src='../images/Cube.png' width=128px/>";
+					echo "<div class='options'>";
+					echo	"<p><a href = 'viewer.php?filename=$myfiles[$i]&user=$user'>View</a></p>";
+					echo 	"<p><a href='download.php?file=$myfiles[$i]&user=$user'> Download</a></p>";
+					echo 	"<p><a href='deletefile.php?file=$myfiles[$i]&user=$user'> Delete</a></p>";
+					echo "</div>";
+					//echo "<a href = 'viewer.php?filename=$myfiles[$i]&user=$user'>$myfiles[$i]</a>";
+					//echo "<br>";
+					echo "</div>";
+				} ?>
+			<!-- </div> -->
+			<div id="fileDisplay">
+
+
+			</div>
 		</main>
 		<footer>
 			<hr>

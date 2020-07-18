@@ -25,7 +25,10 @@ if(isset($_POST['submit'])){
 		    }
 
 		    else{
+						$pass1=md5($pass1);
+						mkdir("../file-upload/". $user, 0700);
             mysqli_query($conn, "INSERT INTO USERS VALUES ('$user', '$pass1')");
+						header("Location: login.php");
 			      $invalid = "Registration successful";
 		    }
     }

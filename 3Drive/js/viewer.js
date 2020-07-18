@@ -98,7 +98,6 @@ function addListeners(){
 
   //uncomment and update for texture input
   /*var texpicker = document.querySelector("#texpicker");
-
   texpicker.addEventListener('input', (e) => {
     importOBJ.traverse(function(child){
       if(child instanceof THREE.Mesh){
@@ -187,8 +186,13 @@ function main(){
 
   var scene = new THREE.Scene();
   var loader = new THREE.OBJLoader();
+
+
+  let params = new URLSearchParams(location.search);
+  var filename =params.get('filename');
+  var user=params.get('user');
   loader.load(
-    "../testData/Sphere.obj",
+    "../file-upload/"+ user + "/" + filename,
     function(object){
       importOBJ = object;
       object.traverse(function(child){

@@ -97,14 +97,24 @@ function addListeners(){
   });
 
   //uncomment and update for texture input
-  /*var texpicker = document.querySelector("#texpicker");
-  texpicker.addEventListener('input', (e) => {
-    importOBJ.traverse(function(child){
-      if(child instanceof THREE.Mesh){
-        child.material.map = new THREE.TextureLoader().load(e.target.value);
-      }
-    });
-  });*/
+  var texpicker = document.querySelector("#texpicker");
+  texpicker.addEventListener('change', (e) => {
+    console.log("Texture change detected");
+    console.log(e.target.files.length);
+    if(e.target.files && e.target.files[0]){
+      var texfile = URL.createObjectURL(e.target.files[0]);
+      console.log(texfile);
+      var texture = new THREE.TextureLoader().load(texfile);
+      console.log(texture);
+      importOBJ.traverse(function(child){
+        if(child instanceof THREE.Mesh){
+          child.material.map = texture;
+          console.log("Applied Texture");
+        }
+      });
+      URL.revokeObjectURL(texfile);
+    }
+  });
 
   var roughpicker = document.querySelector("#roughpicker");
   roughpicker.addEventListener('input', (e) => {
@@ -192,7 +202,8 @@ function main(){
   var filename =params.get('filename');
   var user=params.get('user');
   loader.load(
-    "../file-upload/"+ user + "/" + filename,
+    //"../file-upload/"+ user + "/" + filename,
+    "../testData/Diamond.obj",
     function(object){
       importOBJ = object;
       object.traverse(function(child){

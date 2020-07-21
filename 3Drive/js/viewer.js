@@ -96,23 +96,29 @@ function addListeners(){
     });
   });
 
-  //uncomment and update for texture input
+  //Diffuse texture input
   var texpicker = document.querySelector("#texpicker");
   texpicker.addEventListener('change', (e) => {
-    console.log("Texture change detected");
-    console.log(e.target.files.length);
-    if(e.target.files && e.target.files[0]){
+    if(e.target.files && e.target.files[0] && validateTex(e.target.value)){
+      console.log(e.target.value);
       var texfile = URL.createObjectURL(e.target.files[0]);
-      console.log(texfile);
-      var texture = new THREE.TextureLoader().load(texfile);
-      console.log(texture);
-      importOBJ.traverse(function(child){
-        if(child instanceof THREE.Mesh){
-          child.material.map = texture;
-          console.log("Applied Texture");
-        }
+      var loader = new THREE.TextureLoader();
+      loader.setCrossOrigin("");
+      loader.load(
+        texfile,
+        function (texture){
+          importOBJ.traverse(function(child){
+            if(child instanceof THREE.Mesh){
+              child.material.needsUpdate = true;
+              child.material.map = texture;
+              child.material.needsUpdate = false;
+            }
+          });
+          URL.revokeObjectURL(texfile);
       });
-      URL.revokeObjectURL(texfile);
+    }
+    else{
+      alert("Invalid texture file");
     }
   });
 
@@ -129,6 +135,21 @@ function addListeners(){
   var visButtons = document.getElementsByClassName("visButton");
   for(var i = 0; i < visButtons.length; i++){
     visButtons[i].addEventListener('click', panelHandler);
+  }
+}
+
+function validateTex(filename){
+  var parts = filename.split('.');
+  var type = parts[parts.length - 1];
+  switch (type.toLowerCase()) {
+    case "png":
+    case "jpg":
+    case "jpeg":
+      return true;
+      break;
+    default:
+      return false;
+      break;
   }
 }
 
@@ -202,6 +223,7 @@ function main(){
   var filename =params.get('filename');
   var user=params.get('user');
   loader.load(
+    //First file is for use on live server, second file is for local testing
     //"../file-upload/"+ user + "/" + filename,
     "../testData/Diamond.obj",
     function(object){

@@ -8,9 +8,10 @@
       include 'Vertex.php';
       include 'Edge.php';
       include 'Face.php';
-      $objFile = fopen("Giraffe.obj", "r") or die ("Error opening file!");
+      $objFile = fopen("blob.obj", "r") or die ("Error opening file!");
       $verts = new \Ds\Vector();
       $edges = new \Ds\Vector();
+      $completeEdges = new \Ds\Vector();
       $faces = new \Ds\Vector();
       $vNum = 0;
       $isManifold = true;
@@ -50,10 +51,10 @@
               $verts[$vert1]->addFace($faces[count($faces) - 1]);
 
               //Create tmp edge
-              $tmpEdge = new Edge($fverts[$i], $fverts[($i + 1) % count($fverts)]);
+              $tmpEdge = new Edge($vert1, $vert2);
               $newEdge = true;
 
-              //Update edge if new one matches existing one
+              //If new edge matches existing edge, update old edge and put in $completeEdges
               for($j = 0; $j < count($edges); $j++){
                 $conType = $tmpEdge->equals($edges[$j]);
                 if($conType == 1){
@@ -67,21 +68,23 @@
                   //If only used once, increase card to 2
                   $edges[$j]->incCard();
                   //Add reference to edge to new face
-                  $faces[count($faces) - 1]->addEdge($j);
+                  $faces[count($faces) - 1]->addEdge($edges[$j]);
+                  $completeEdges->push($edges[$j]);
+                  $edges->remove($j);
                   break;
                 }
                 else if($conType == -1){
                   $newEdge = false;
                   $isManifold = false;
-                  $reason = "Incorrect normals";
+                  $reason = "Incorrect normals or internal faces detected";
                   break;
                 }
               }
 
-              //Add new edge if it doesn't already exist
+              //Add new edge if it doesn't already exist. New edges go in $edges
               if($newEdge){
                 $edges->push($tmpEdge);
-                $faces[count($faces) - 1]->addEdge(count($edges) - 1);
+                $faces[count($faces) - 1]->addEdge($tmpEdge);
               }
             }
             break;
@@ -96,14 +99,9 @@
       }
 
       //Look for boundary edges
-      if($isManifold){
-        for($i = 0; $i < count($edges); $i++){
-          if($edges[$i]->getCard() != 2){
-            $isManifold = false;
-            $reason = "Boundary edge detected";
-            break;
-          }
-        }
+      if($isManifold && count($edges) != 0){
+        $isManifold = false;
+        $reason = "Boundary edges or internal faces detected";
       }
 
       //Look for loose verts and bowtie geometry
@@ -111,7 +109,6 @@
         for($i = 0; $i < count($verts); $i++){
           //search for bowtie if card of the vertex is 6 or more
           if($verts[$i]->getCard() > 5){
-            echo("<p>").$verts[$i]->getCard()."-pole detected. It may be a bowtie...</p>";
             //sussFaces are under scrutiny
             $sussFaces = $verts[$i]->getFacePointers();
 
@@ -136,8 +133,6 @@
               }
               $j++;
             }
-            echo "<p>Linked ".count($linkedFaces). " faces</p>";
-            echo "<p>".count($sussFaces)." faces remaining</p>";
             if(count($sussFaces) > 0){
               $isManifold = false;
               $reason = "Bowtie detected";

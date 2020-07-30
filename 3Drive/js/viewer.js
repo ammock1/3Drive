@@ -1,5 +1,5 @@
 window.onload = main;
-var camera, renderer, importOBJ, lights;
+var camera, renderer, scene, importOBJ, lights;
 
 function initLightPane(){
   var lightPanel = document.querySelector("#LightPanel");
@@ -131,6 +131,22 @@ function addListeners(){
     });
   });
 
+  //Add listener to download image
+  var saveButton = document.getElementById("download_img");
+  saveButton.addEventListener('click', (e) =>{
+    renderer.render( scene, camera );
+    var imgSrc = renderer.domElement.toDataURL();
+    var img = document.getElementById("preview");
+    img.src = imgSrc;
+    document.getElementById("previewFig").style.display = "block";
+  });
+
+  //Listener to hide preview image
+  var close = document.getElementById("closePreview");
+  close.addEventListener('click', (e) =>{
+    document.getElementById("previewFig").style.display = "none";
+  });
+
   //Add listeners to visibility toggle buttons
   var visButtons = document.getElementsByClassName("visButton");
   for(var i = 0; i < visButtons.length; i++){
@@ -202,6 +218,8 @@ function main(){
   for(var i = 0; i < panels.length; i++){
     panels[i].style.display = "none";
   }
+  var figure = document.getElementById("previewFig");
+  figure.style.display = "none";
   //Get openGL
   const canvas = document.querySelector("#glCanvas");
   const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
@@ -215,7 +233,7 @@ function main(){
   //var texture = new THREE.TextureLoader().load('../testData/Diamond_Diffuse.png');
   var material = new THREE.MeshStandardMaterial({roughness: 0.5, metalness: 0.0});
 
-  var scene = new THREE.Scene();
+  scene = new THREE.Scene();
   var loader = new THREE.OBJLoader();
 
 
@@ -248,12 +266,8 @@ function main(){
   var ambient = new THREE.AmbientLight( 0x404040 );
   var mainLight = new THREE.DirectionalLight( 0xffffbb, 1.0);
   mainLight.position.set( 50, 150, 100 );
-  var mainHelp = new THREE.DirectionalLightHelper(mainLight, 2);
-  scene.add( mainHelp );
   var fillLight = new THREE.DirectionalLight(0xbbffff, 0.1);
   fillLight.position.set(-50, -50, -100);
-  var fillHelp = new THREE.DirectionalLightHelper(fillLight, 2);
-  scene.add (fillHelp);
   lights = [];
   lights.push(ambient);
   lights.push(mainLight);
@@ -262,7 +276,7 @@ function main(){
     scene.add(lights[i]);
   }
   initLightPane();
-
+  addListeners();
   //Moving camera and setting up controls
   camera.position.z = 5;
   var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -272,6 +286,5 @@ function main(){
     controls.update();
     renderer.render( scene, camera );
   };
-  addListeners();
   animate();
 }

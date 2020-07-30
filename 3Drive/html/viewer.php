@@ -1,5 +1,5 @@
 <?php
-	include ('logincode.php')
+  include ('logincode.php')
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
     <canvas id = "glCanvas" width="0" height="0"></canvas>
     <div id = "container" width="640" height="480"></div>
     <script src="../js/viewer.js"></script>
-    <a href = "../html/list.php" id="goback">Go Back</a>
+    <a href = "3drive.html" id="goback">Go Back</a>
     <div id="sidebar">
       <div id = "panelsDiv">
         <div id="TransformPanel" class="panel">
@@ -40,7 +40,14 @@
           <label> Scale: </label>
           <input type= "number" value = "1" id="scale" class= "tinput">
         </div>
-        <div id= "LightPanel" class="panel"></div>
+        <div id= "LightPanel" class="panel">
+          <h1> Lights </h1>
+          <label> X </label>
+          <label> Y </label>
+          <label> Z </label>
+          <label> Intensity </label>
+          <label> Color </label>
+        </div>
         <div id= "MatPanel" class="panel">
           <label> Color: </label>
           <input id = "colorpicker" type="color" value="#ffffff"/><br>
@@ -49,7 +56,10 @@
           <label> Roughness: </label>
           <input id = "roughpicker" type="number" min="0" max="1" value = "0.5">
         </div>
-        <div id= "SavePanel" class="panel"></div>
+        <div id= "SavePanel" class="panel">
+          <button id = "download_img">Render Image</button>
+          <button id = "set_thumbnail">Set Thumbnail</button>
+        </div>
       </div>
       <div id = "buttonsDiv">
         <button id="tbutton" class="visButton"> Transform </button>
@@ -57,6 +67,13 @@
         <button id="mbutton" class="visButton"> Edit Material </button>
         <button id ="sbutton" class="visButton"> Save Image </button><br>
       </div>
+    </div>
+    <div id = "previewFig"
+      <figure>
+        <img id = "preview" width = 256px/>
+        <figcaption>Right click on the preview image to save!</figcaption>
+      </figure>
+      <button id = "closePreview" class = "x">x</button>
     </div>
   </body>
 

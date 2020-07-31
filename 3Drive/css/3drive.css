@@ -6,8 +6,6 @@ body{
   float: left;
 }
 main{
-  display: flex;
-  flex-wrap: wrap;
   align-content: center;
 }
 header{
@@ -25,13 +23,20 @@ h2{
   position: relative;
   left: 18px;
 }
+h2 a{
+  font-family: sans-serif;
+  font-size: 18px;
+  color: grey;
+  text-decoration-color: grey;
+  text-underline-position: left;
+}
 
 #logbox, #viewbox{
   padding: 1em;
   text-align: center;
-  margin: 2em;
+  margin: 3em;
   background-color: white;
-  flex-basis: 20em;
+  display: inline-block;
 }
 
 #logbox{

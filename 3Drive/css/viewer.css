@@ -1,21 +1,28 @@
-body { margin: 0; }
+body {
+  margin: 0;
+  font-family: arial, sans-serif;
+}
 canvas {
   display:inline;
   float: right;
 }
 #goback{
-  padding: 1em;
   margin-left: 10px;
-  background-color: white;
-  border-radius: 100px;
   position: absolute;
-  top: 10%;
+  top: 3%;
 }
 #sidebar{
+  color: white;
   position: absolute;
   padding: 1em;
-  background-color: rgba(255, 255, 255, 0.7);
-  top: 20%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-width: 3px;
+  border-style: solid;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-left-style: none;
+  border-color: white;
+  top: 30%;
   text-align: center;
 }
 .visButton{
@@ -24,6 +31,7 @@ canvas {
 #panelsDiv{
   float:left;
   display: inline;
+  padding: 0.5em;
 }
 
 #buttonsDiv{
@@ -54,4 +62,42 @@ button{
   border-style: solid;
   top: 0%;
   right: 0%;
+}
+.visButton{
+  background-repeat: no-repeat;
+  border-style: none;
+  width: 64px;
+  height: 64px;
+  background-size: 64px;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: center;
+}
+#tbutton{
+  background-image: url("../images/transform.png");
+  background-repeat: no-repeat;
+  border-style: none;
+  width: 64px;
+  height: 64px;
+  background-size: 64px;
+}
+#lbutton{
+  background-image: url("../images/light.png");
+  background-size: 85px;
+  background-position: center;
+}
+#mbutton{
+  background-image: url("../images/material.png");
+  background-size: 35px;
+}
+#sbutton{
+  background-image:url("../images/camera.png");
+}
+
+h1, h2{
+  font-family: impact, fantasy;
+  font-weight: normal;
+}
+
+#scaleLabel{
+  display: inline-block;
 }

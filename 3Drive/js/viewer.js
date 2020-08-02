@@ -2,41 +2,52 @@ window.onload = main;
 var camera, renderer, scene, importOBJ, lights;
 
 function initLightPane(){
-  var lightPanel = document.querySelector("#LightPanel");
+  var lightPanel = document.querySelector("#LightTable");
   for(var i = 0; i < lights.length; i++){
-    var curLight = document.createElement("div");
-    var label = document.createElement("label");
-    label.innerText = (i+1 + ": ");
+    var curLight = document.createElement("tr");
+    var label = document.createElement("td");
+    label.innerText = (i + ": ");
     curLight.append(label);
     if(lights[i] instanceof THREE.AmbientLight){
-      label.innerText = label.innerText + ("Ambient");
+      label.innerText = ("Ambient");
+      label.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+      label.colSpan = "4";
     }
     else{
+      var xposTD = document.createElement("td");
       var xpos = document.createElement("input");
       xpos.type = "number";
       xpos.id = i + "x";
       xpos.value = lights[i].position.x;
       xpos.addEventListener("input", updateLights);
+      xposTD.append(xpos);
+      var yposTD = document.createElement("td");
       var ypos = document.createElement("input");
       ypos.type = "number";
       ypos.id = i + "y";
       ypos.value = lights[i].position.y;
       ypos.addEventListener("input", updateLights);
+      yposTD.append(ypos);
+      var zposTD = document.createElement("td");
       var zpos = document.createElement("input");
       zpos.type = "number";
       zpos.id = i + "z";
       zpos.value = lights[i].position.z;
       zpos.addEventListener("input", updateLights);
-      curLight.append(xpos);
-      curLight.append(ypos);
-      curLight.append(zpos);
+      zposTD.append(zpos);
+      curLight.append(xposTD);
+      curLight.append(yposTD);
+      curLight.append(zposTD);
     }
+    var intensityTD = document.createElement("td");
     var intensity = document.createElement("input");
     intensity.type = "number";
     intensity.id = i + "i";
     intensity.value = lights[i].intensity;
     intensity.addEventListener("input", updateLights);
-    curLight.append(intensity);
+    intensityTD.append(intensity);
+    curLight.append(intensityTD);
+    var colorTD = document.createElement("td");
     var color = document.createElement("input");
     color.type = "color";
     color.id = i + "c";
@@ -44,7 +55,8 @@ function initLightPane(){
     cstring = "#" + cstring;
     color.value = cstring;
     color.addEventListener("input", updateLights)
-    curLight.append(color);
+    colorTD.append(color);
+    curLight.append(colorTD);
     lightPanel.append(curLight);
   }
 
@@ -242,8 +254,8 @@ function main(){
   var user=params.get('user');
   loader.load(
     //First file is for use on live server, second file is for local testing
-    //"../file-upload/"+ user + "/" + filename,
-    "../testData/Diamond.obj",
+    "../file-upload/"+ user + "/" + filename,
+    //"../testData/Diamond.obj",
     function(object){
       importOBJ = object;
       object.traverse(function(child){

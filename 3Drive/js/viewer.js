@@ -255,7 +255,7 @@ function main(){
   loader.load(
     //First file is for use on live server, second file is for local testing
     "../file-upload/"+ user + "/" + filename,
-    //"../testData/Diamond.obj",
+    //"../testData/Sphere.obj",
     function(object){
       importOBJ = object;
       object.traverse(function(child){

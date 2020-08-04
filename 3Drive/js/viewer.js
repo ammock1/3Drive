@@ -144,7 +144,7 @@ function addListeners(){
   });
 
   //Add listener to download image
-  var saveButton = document.getElementById("download_img");
+  var saveButton = document.getElementById("sbutton");
   saveButton.addEventListener('click', (e) =>{
     renderer.render( scene, camera );
     var imgSrc = renderer.domElement.toDataURL();
@@ -194,9 +194,6 @@ function panelHandler(e){
       break;
     case "mbutton":
       target = document.querySelector("#MatPanel");
-      break;
-    case "sbutton":
-      target = document.querySelector("#SavePanel");
       break;
   }
   if(target.style.display == "none"){

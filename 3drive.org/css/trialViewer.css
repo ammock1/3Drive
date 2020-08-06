@@ -63,7 +63,7 @@ button{
   top: 0%;
   right: 0%;
 }
-.imgButton{
+.visButton{
   background-repeat: no-repeat;
   border-style: none;
   width: 64px;
@@ -100,4 +100,8 @@ h1, h2{
 
 #scaleLabel{
   display: inline-block;
+}
+
+#upfile{
+  display: none;
 }
